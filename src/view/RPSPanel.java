@@ -3,6 +3,10 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,6 +16,8 @@ import javax.swing.JTextField;
 import controller.RPSController;
 
 import javax.swing.SpringLayout;
+
+import model.RPSNum;
 
 public class RPSPanel extends JPanel
 {
@@ -83,8 +89,23 @@ public class RPSPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				// TODO Auto-generated method stub
+				int winner = baseController.updatePlay(RPSNum.Rock);
 				
+				if(winner == 0)
+				{
+					outcome.setText("Tie");
+				}
+				else
+				{
+					if(winner == 1)
+					{
+						outcome.setText("P1");
+					}
+					else
+					{
+						outcome.setText("BOT!!!");
+					}
+				}
 			}
 			
 		});
@@ -95,8 +116,23 @@ public class RPSPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				// TODO Auto-generated method stub
+				int winner = baseController.updatePlay(RPSNum.Paper);
 				
+				if(winner == 0)
+				{
+					outcome.setText("Tie");
+				}
+				else
+				{
+					if(winner == 1)
+					{
+						outcome.setText("P1");
+					}
+					else
+					{
+						outcome.setText("BOT!!!");
+					}
+				}
 			}
 			
 		});
@@ -107,9 +143,81 @@ public class RPSPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				// TODO Auto-generated method stub
+				int winner = baseController.updatePlay(RPSNum.Scissors);
+				
+				if(winner == 0)
+				{
+					outcome.setText("Tie");
+				}
+				else
+				{
+					if(winner == 1)
+					{
+						outcome.setText("P1");
+					}
+					else
+					{
+						outcome.setText("BOT!!!");
+					}
+				}
+			}
+			
+		});
+		
+		this.addMouseMotionListener(new MouseMotionListener()
+		{
+
+			@Override
+			public void mouseDragged(MouseEvent dragged)
+			{
+				changeRandomColor();
 				
 			}
+
+			@Override
+			public void mouseMoved(MouseEvent moved)
+			{}
+			
+		});
+		
+		this.addKeyListener(new KeyListener()
+		{
+
+			@Override
+			public void keyTyped(KeyEvent keyE)
+			{
+				int key = keyE.getKeyCode();
+				
+				
+				if(key == keyE.VK_Z)
+				{
+					int winner = baseController.updatePlay(RPSNum.Scissors);
+					
+					if(winner == 0)
+					{
+						outcome.setText("Tie");
+					}
+					else
+					{
+						if(winner == 1)
+						{
+							outcome.setText("P1");
+						}
+						else
+						{
+							outcome.setText("BOT!!!");
+						}
+					}
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e)
+			{}
+
+			@Override
+			public void keyReleased(KeyEvent e)
+			{}
 			
 		});
 		

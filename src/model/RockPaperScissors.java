@@ -29,6 +29,10 @@ public class RockPaperScissors
 						case Scissors:
 							winner = 2;
 							break;
+						case Rock:
+							break;
+						default:
+							break;
 					}
 					break;
 				case Paper:
@@ -39,6 +43,10 @@ public class RockPaperScissors
 							break;
 						case Rock:
 							winner = 2;
+							break;
+						case Paper:
+							break;
+						default:
 							break;
 					}
 					break;
@@ -51,9 +59,14 @@ public class RockPaperScissors
 						case Paper:
 							winner = 2;
 							break;
+						case Scissors:
+							break;
+						default:
+							break;
 					}
 					break;
-					
+				default:
+					break;
 			}
 			
 		}
@@ -76,6 +89,10 @@ public class RockPaperScissors
 						case Scissors:
 							winner = 2;
 							break;
+						case Rock:
+							break;
+						default:
+							break;
 					}
 					break;
 				case Paper:
@@ -86,6 +103,10 @@ public class RockPaperScissors
 							break;
 						case Rock:
 							winner = 2;
+							break;
+						case Paper:
+							break;
+						default:
 							break;
 					}
 					break;
@@ -98,7 +119,13 @@ public class RockPaperScissors
 						case Paper:
 							winner = 2;
 							break;
+						case Scissors:
+							break;
+						default:
+							break;
 					}
+					break;
+				default:
 					break;
 					
 			}
@@ -109,6 +136,20 @@ public class RockPaperScissors
 	
 	public void updateBotChoice()
 	{
-		
+		int rand = (int) (Math.random()*3);
+		switch(rand)
+		{
+			case 0:
+				botChoice = RPSNum.Rock;
+				break;
+			case 1:
+				botChoice = RPSNum.Paper;
+				break;
+			case 2:
+				botChoice = RPSNum.Scissors;
+				break;
+			default:
+				break;
+		}
 	}
 }

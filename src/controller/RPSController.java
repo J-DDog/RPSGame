@@ -1,5 +1,6 @@
 package controller;
 
+import model.RPSNum;
 import model.RockPaperScissors;
 import view.RPSFrame;
 
@@ -19,5 +20,10 @@ public class RPSController
 		
 	}
 	
+	public int updatePlay(RPSNum choice)
+	{
+		return rps.playerScores(choice);
+		
+	}
 	
 }
