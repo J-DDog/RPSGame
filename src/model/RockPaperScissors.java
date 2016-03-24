@@ -2,136 +2,30 @@ package model;
 
 public class RockPaperScissors
 {
+	private RPSNum botChoice;
+	private RPSNum p1Choice;
+	private RPSNum p2Choice;
 	private int p1Wins;
 	private int p2Wins;
 	private int botWins;
-	private RPSNum botChoice;
+	private int ties;
+	
 	
 	public RockPaperScissors()
 	{
-		
-	}
-	
-	public int playerScores(RPSNum p1Choice)
-	{
-		int winner = 0;
 		updateBotChoice();
-		if(p1Choice != botChoice)
-		{
-			switch(botChoice)
-			{
-				case Rock:
-					switch(p1Choice)
-					{
-						case Paper:
-							winner = 1;
-							break;
-						case Scissors:
-							winner = 2;
-							break;
-						case Rock:
-							break;
-						default:
-							break;
-					}
-					break;
-				case Paper:
-					switch(p1Choice)
-					{
-						case Scissors:
-							winner = 1;
-							break;
-						case Rock:
-							winner = 2;
-							break;
-						case Paper:
-							break;
-						default:
-							break;
-					}
-					break;
-				case Scissors:
-					switch(p1Choice)
-					{
-						case Rock:
-							winner = 1;
-							break;
-						case Paper:
-							winner = 2;
-							break;
-						case Scissors:
-							break;
-						default:
-							break;
-					}
-					break;
-				default:
-					break;
-			}
-			
-		}
-		return winner;
 	}
 	
-	public int playerScores(RPSNum p1Choice, RPSNum p2Choice)
+	public void playerScores(RPSNum choice, int i)
 	{
-		int winner = 0;
-		if(p1Choice != p2Choice)
+		if(i == 1)
 		{
-			switch(p2Choice)
-			{
-				case Rock:
-					switch(p1Choice)
-					{
-						case Paper:
-							winner = 1;
-							break;
-						case Scissors:
-							winner = 2;
-							break;
-						case Rock:
-							break;
-						default:
-							break;
-					}
-					break;
-				case Paper:
-					switch(p1Choice)
-					{
-						case Scissors:
-							winner = 1;
-							break;
-						case Rock:
-							winner = 2;
-							break;
-						case Paper:
-							break;
-						default:
-							break;
-					}
-					break;
-				case Scissors:
-					switch(p1Choice)
-					{
-						case Rock:
-							winner = 1;
-							break;
-						case Paper:
-							winner = 2;
-							break;
-						case Scissors:
-							break;
-						default:
-							break;
-					}
-					break;
-				default:
-					break;
-					
-			}
-			
+			this.p1Choice = choice;
 		}
-		return winner;
+		else
+		{
+			this.p2Choice = choice;
+		}
 	}
 	
 	public void updateBotChoice()
@@ -152,4 +46,160 @@ public class RockPaperScissors
 				break;
 		}
 	}
+	
+	public int getWinner(boolean multiplayer)
+	{
+		int winner = 0;
+		if(multiplayer)
+		{
+			switch(p1Choice)
+			{
+				case Rock:
+					switch(p2Choice)
+					{
+						case Paper:
+							p2Wins++;
+							winner = 2;
+							break;
+						case Rock:
+							ties++;
+							break;
+						case Scissors:
+							p1Wins++;
+							winner = 1;
+							break;
+						default:
+							break;
+						
+					}
+					break;
+				case Paper:
+					switch(p2Choice)
+					{
+						case Paper:
+							ties++;
+							break;
+						case Rock:
+							p1Wins++;
+							winner = 1;
+							break;
+						case Scissors:
+							p2Wins++;
+							winner = 2;
+							break;
+						default:
+							break;
+						
+					}
+					break;
+				case Scissors:
+					switch(p2Choice)
+					{
+						case Paper:
+							p1Wins++;
+							winner = 1;
+							break;
+						case Rock:
+							p2Wins++;
+							winner = 2;
+							break;
+						case Scissors:
+							ties++;
+							break;
+						default:
+							break;
+						
+					}
+					break;
+			}
+		}
+		else
+		{
+			switch(p1Choice)
+			{
+				case Rock:
+					switch(botChoice)
+					{
+						case Paper:
+							p2Wins++;
+							winner = 2;
+							break;
+						case Rock:
+							ties++;
+							break;
+						case Scissors:
+							p1Wins++;
+							winner = 1;
+							break;
+						default:
+							break;
+						
+					}
+					break;
+				case Paper:
+					switch(botChoice)
+					{
+						case Paper:
+							ties++;
+							break;
+						case Rock:
+							p1Wins++;
+							winner = 1;
+							break;
+						case Scissors:
+							p2Wins++;
+							winner = 2;
+							break;
+						default:
+							break;
+						
+					}
+					break;
+				case Scissors:
+					switch(botChoice)
+					{
+						case Paper:
+							p1Wins++;
+							winner = 1;
+							break;
+						case Rock:
+							p2Wins++;
+							winner = 2;
+							break;
+						case Scissors:
+							ties++;
+							break;
+						default:
+							break;
+						
+					}
+					break;
+			}
+		}
+		return winner;
+	}
+	
+	public RPSNum getBotChoice()
+	{
+		return botChoice;
+	}
+	
+	public int[] getScoreBoard(boolean multiplayer)
+	{
+		int[] scoreBoard;
+		scoreBoard = new int[3];
+		scoreBoard[0] = p1Wins;
+		scoreBoard[1] = ties;
+		if(multiplayer)
+		{
+			scoreBoard[2] = p2Wins;
+		}
+		else
+		{
+			scoreBoard[2] = botWins;
+		}
+		return scoreBoard;
+		
+	}
+	
 }

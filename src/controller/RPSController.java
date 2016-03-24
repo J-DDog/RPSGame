@@ -20,10 +20,18 @@ public class RPSController
 		
 	}
 	
-	public int updatePlay(RPSNum choice)
+	public void updatePlay(RPSNum choice, int player)
 	{
-		return rps.playerScores(choice);
-		
+		rps.playerScores(choice, player);
 	}
 	
+	public int getWinner(boolean multiplayer)
+	{
+		return rps.getWinner(multiplayer);
+	}
+	
+	public int[] getScoreBoard(boolean multiplayer)
+	{
+		return rps.getScoreBoard(multiplayer);
+	}
 }

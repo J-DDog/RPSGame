@@ -33,6 +33,9 @@ public class RPSPanel extends JPanel
 	private JTextField p2Field;
 	private JLabel outcome;
 	
+	private boolean p1Updated;
+	private boolean p2Updated;
+	
 	public RPSPanel(RPSController baseController)
 	{
 		this.baseController = baseController;
@@ -51,6 +54,9 @@ public class RPSPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, p2Field, 6, SpringLayout.EAST, outcome);
 		baseLayout.putConstraint(SpringLayout.NORTH, outcome, 16, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, p1Field, -6, SpringLayout.WEST, outcome);
+		
+		p1Updated = false;
+		p2Updated = false;
 		
 		setupPanel();
 		setupLayout();
@@ -89,23 +95,7 @@ public class RPSPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				int winner = baseController.updatePlay(RPSNum.Rock);
-				
-				if(winner == 0)
-				{
-					outcome.setText("Tie");
-				}
-				else
-				{
-					if(winner == 1)
-					{
-						outcome.setText("P1");
-					}
-					else
-					{
-						outcome.setText("BOT!!!");
-					}
-				}
+				baseController.updatePlay(RPSNum.Rock, 1);
 			}
 			
 		});
@@ -116,23 +106,7 @@ public class RPSPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				int winner = baseController.updatePlay(RPSNum.Paper);
-				
-				if(winner == 0)
-				{
-					outcome.setText("Tie");
-				}
-				else
-				{
-					if(winner == 1)
-					{
-						outcome.setText("P1");
-					}
-					else
-					{
-						outcome.setText("BOT!!!");
-					}
-				}
+				baseController.updatePlay(RPSNum.Paper, 1);
 			}
 			
 		});
@@ -143,23 +117,7 @@ public class RPSPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				int winner = baseController.updatePlay(RPSNum.Scissors);
-				
-				if(winner == 0)
-				{
-					outcome.setText("Tie");
-				}
-				else
-				{
-					if(winner == 1)
-					{
-						outcome.setText("P1");
-					}
-					else
-					{
-						outcome.setText("BOT!!!");
-					}
-				}
+				baseController.updatePlay(RPSNum.Scissors, 1);
 			}
 			
 		});
@@ -188,27 +146,33 @@ public class RPSPanel extends JPanel
 			{
 				int key = keyE.getKeyCode();
 				
-				
-				if(key == keyE.VK_Z)
+				switch(key)
 				{
-					int winner = baseController.updatePlay(RPSNum.Scissors);
-					
-					if(winner == 0)
-					{
-						outcome.setText("Tie");
-					}
-					else
-					{
-						if(winner == 1)
-						{
-							outcome.setText("P1");
-						}
-						else
-						{
-							outcome.setText("BOT!!!");
-						}
-					}
+					case KeyEvent.VK_Z:
+						baseController.updatePlay(RPSNum.Rock, 1);
+						break;
+					case KeyEvent.VK_X:
+						baseController.updatePlay(RPSNum.Paper, 1);
+						break;
+					case KeyEvent.VK_C:
+						baseController.updatePlay(RPSNum.Scissors, 1);
+						break;
+						
+					case KeyEvent.VK_LEFT:
+						baseController.updatePlay(RPSNum.Rock, 2);
+						break;
+					case KeyEvent.VK_DOWN:
+						baseController.updatePlay(RPSNum.Paper, 2);
+						break;
+					case KeyEvent.VK_RIGHT:
+						baseController.updatePlay(RPSNum.Scissors, 2);
+						break;
+					default:
+						
+						break;
 				}
+				
+				
 			}
 
 			@Override
@@ -231,6 +195,11 @@ public class RPSPanel extends JPanel
 		blue = (int) (Math.random() * 256);
 		
 		this.setBackground(new Color(red, green, blue));
+	}
+	
+	private void updateSelections()
+	{
+		
 	}
 	
 }
