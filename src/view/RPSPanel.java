@@ -29,8 +29,9 @@ public class RPSPanel extends JPanel
 	private JButton scissorsButton;
 	private JButton quitButton;
 	private JButton multiPlayer;
-	private JTextField p1Field;
-	private JTextField p2Field;
+	private JTextField p1Score;
+	private JTextField tieScore;
+	private JTextField p2Score;
 	private JLabel outcome;
 	
 	private boolean p1Updated;
@@ -45,15 +46,22 @@ public class RPSPanel extends JPanel
 		paperButton = new JButton("Paper");
 		scissorsButton = new JButton("Scissors");
 		baseLayout.putConstraint(SpringLayout.EAST, scissorsButton, -100, SpringLayout.EAST, this);
-		p1Field = new JTextField();
-		baseLayout.putConstraint(SpringLayout.NORTH, p1Field, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, p1Field, 198, SpringLayout.WEST, this);
-		p2Field = new JTextField();
-		baseLayout.putConstraint(SpringLayout.EAST, p2Field, -189, SpringLayout.EAST, this);
-		outcome = new JLabel("Vs");
-		baseLayout.putConstraint(SpringLayout.WEST, p2Field, 6, SpringLayout.EAST, outcome);
-		baseLayout.putConstraint(SpringLayout.NORTH, outcome, 16, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, p1Field, -6, SpringLayout.WEST, outcome);
+		p1Score = new JTextField("P1:");
+		baseLayout.putConstraint(SpringLayout.EAST, p1Score, -296, SpringLayout.EAST, scissorsButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, p1Score, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, p1Score, 100, SpringLayout.WEST, this);
+		tieScore = new JTextField("Tie:");
+		baseLayout.putConstraint(SpringLayout.NORTH, tieScore, 0, SpringLayout.NORTH, p1Score);
+		baseLayout.putConstraint(SpringLayout.WEST, tieScore, 258, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, tieScore, 0, SpringLayout.EAST, paperButton);
+		p2Score = new JTextField("Bot:");
+		baseLayout.putConstraint(SpringLayout.NORTH, p2Score, 0, SpringLayout.NORTH, p1Score);
+		baseLayout.putConstraint(SpringLayout.WEST, p2Score, 46, SpringLayout.EAST, tieScore);
+		baseLayout.putConstraint(SpringLayout.EAST, p2Score, 150, SpringLayout.EAST, tieScore);
+		outcome = new JLabel();
+		baseLayout.putConstraint(SpringLayout.NORTH, outcome, 51, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, outcome, -285, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, paperButton, 21, SpringLayout.SOUTH, outcome);
 		
 		p1Updated = false;
 		p2Updated = false;
@@ -70,8 +78,9 @@ public class RPSPanel extends JPanel
 		this.add(rockButton);
 		this.add(paperButton);
 		this.add(scissorsButton);
-		this.add(p1Field);
-		this.add(p2Field);
+		this.add(p1Score);
+		this.add(tieScore);
+		this.add(p2Score);
 		this.add(outcome);
 	}
 
@@ -80,9 +89,6 @@ public class RPSPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, paperButton, -252, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, rockButton, 0, SpringLayout.NORTH, paperButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, scissorsButton, 0, SpringLayout.NORTH, rockButton);
-		baseLayout.putConstraint(SpringLayout.NORTH, p2Field, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, paperButton, 56, SpringLayout.SOUTH, outcome);
-		baseLayout.putConstraint(SpringLayout.WEST, outcome, 300, SpringLayout.WEST, this);
 		
 		
 	}
@@ -150,22 +156,28 @@ public class RPSPanel extends JPanel
 				{
 					case KeyEvent.VK_Z:
 						baseController.updatePlay(RPSNum.Rock, 1);
+						p1Updated = true;
 						break;
 					case KeyEvent.VK_X:
 						baseController.updatePlay(RPSNum.Paper, 1);
+						p1Updated = true;
 						break;
 					case KeyEvent.VK_C:
 						baseController.updatePlay(RPSNum.Scissors, 1);
+						p1Updated = true;
 						break;
 						
 					case KeyEvent.VK_LEFT:
 						baseController.updatePlay(RPSNum.Rock, 2);
+						p2Updated = true;
 						break;
 					case KeyEvent.VK_DOWN:
 						baseController.updatePlay(RPSNum.Paper, 2);
+						p2Updated = true;
 						break;
 					case KeyEvent.VK_RIGHT:
 						baseController.updatePlay(RPSNum.Scissors, 2);
+						p2Updated = true;
 						break;
 					default:
 						

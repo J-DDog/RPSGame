@@ -19,7 +19,7 @@ public class RPSFrame extends JFrame
 	public void setupFrame()
 	{
 		this.setContentPane(basePanel);
-		this.setSize(600, 600);
+		this.setSize(600, 200);
 		this.setTitle("ROCK PAPER SCISSORS EXTREAM");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
